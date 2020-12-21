@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/computer"
+        style="@style/TextViewStatistics.SecondaryTextColor"
+        android:text="Computer"
+        app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round"
+        app:layout_constraintStart_toStartOf="@+id/tv_label_header_round"
+        app:layout_constraintTop_toTopOf="@+id/tv_data_round1_computer" />
+
+    <ImageView
+        android:id="@+id/computer_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        />
+
+    <TextView
+        android:id="@+id/user"
+        style="@style/TextViewStatistics.SecondaryTextColor"
+        android:text="You"
+        app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round"
+        app:layout_constraintStart_toStartOf="@+id/tv_label_header_round"
+        app:layout_constraintTop_toTopOf="@+id/tv_data_round1_computer" />
+
+    <ImageView
+        android:id="@+id/user_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        />
+    <TextView
+        android:id="@+id/winner"
+        style="@style/TextViewStatistics.SecondaryTextColor"
+        android:text="Winner"
+        app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round"
+        app:layout_constraintStart_toStartOf="@+id/tv_label_header_round"
+        app:layout_constraintTop_toTopOf="@+id/tv_data_round1_computer" />
+
+    <ImageView
+        android:id="@+id/winner_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        />
+    <TextView
+        android:id="@+id/winner_display"
+        style="@style/TextViewStatistics.SecondaryTextColor"
+        android:text="Winner: "
+        app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round"
+        app:layout_constraintStart_toStartOf="@+id/tv_label_header_round"
+        app:layout_constraintTop_toTopOf="@+id/tv_data_round1_computer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

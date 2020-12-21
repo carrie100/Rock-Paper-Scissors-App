@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">RockPaperScissors</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="Rock">Rock</string>
+    <string name="Paper">Paper</string>
+    <string name="Scissors">Scissors</string>
+
+    <string name="fab">FAB</string>
+
+    <string name="banner_text">Please choose Rock, Paper, or Scissors</string>
+
+    <string name="new_game">New Game</string>
+    <string name="rounds">Rounds</string>
+</resources>

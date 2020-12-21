@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MaterialCardWithBorder"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/double_activity_margin"
+    android:alpha=".8"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    tools:showIn="@layout/content_main">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/image_rock"
+            style="@style/BorderlessButton"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:contentDescription="@string/Rock"
+            android:scaleType="fitXY"
+            android:text="@string/Rock"
+            app:srcCompat="@drawable/rock" />
+
+
+        <ImageButton
+            android:id="@+id/image_paper"
+            style="@style/BorderlessButton"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:contentDescription="@string/Paper"
+            android:scaleType="fitXY"
+            android:text="@string/Paper"
+            app:srcCompat="@drawable/paper" />
+
+        <ImageButton
+            android:id="@+id/image_scissors"
+            style="@style/BorderlessButton"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:contentDescription="@string/Scissors"
+            android:scaleType="fitXY"
+            android:text="@string/Scissors"
+            app:srcCompat="@drawable/scissors" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
+
