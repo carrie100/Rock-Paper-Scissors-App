@@ -12,8 +12,13 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ImageView imgHuman, imgComputer;
+    private View [] imagesRPS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        setupFields();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -32,6 +39,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void setupFields() {
+        imgHuman = findViewById(R.id.img_human_choice);
+        imgComputer = findViewById(R.id.img_computer_choice);
+        imagesRPS = new View[]{findViewById(R.id.image_rock),
+                findViewById(R.id.image_paper),
+                findViewById(R.id.image_scissors)};
+    }
 
 
     @Override
@@ -57,5 +71,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pickRPS(View view) {
+        int[] drawables = {R.drawable.rock, R.drawable.paper, R.drawable.scissors};
+        int randomNumber, humanNumber;
+
+        // Human
+        ImageButton currentView = (ImageButton) view;
+        imgHuman.setImageDrawable(currentView.getDrawable());
+
+        for (int i = 0; i < imagesRPS.length; i++) {
+            if (view == imagesRPS[i])
+                humanNumber = i;
+        }
+
+        // Do computer
+        randomNumber = (int) Math.floor(Math.random() * 3);
+        //Toast.makeText(getApplicationContext(),"Random: " + randomNumber, Toast.LENGTH_SHORT).show();
+        imgComputer.setImageResource(drawables[randomNumber]);
+
+        // TODO: compare human number to computer number to determine winner
     }
 }

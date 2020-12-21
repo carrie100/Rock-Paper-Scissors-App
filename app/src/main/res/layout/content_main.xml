@@ -6,20 +6,9 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <include
-        layout="@layout/main_include_instruction_bar"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent=".25"
-        android:orientation="horizontal"/>
-
+    <include layout="@layout/main_include_instruction_bar"/>
     <include layout="@layout/main_include_rounds_board" />
-
-    <include
-        layout="@layout/main_include_three_buttons" />
-
+    <include layout="@layout/main_include_game_board"/>
+    <include layout="@layout/main_include_three_buttons" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
