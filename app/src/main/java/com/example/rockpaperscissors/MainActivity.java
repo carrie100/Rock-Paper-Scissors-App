@@ -89,5 +89,39 @@ public class MainActivity extends AppCompatActivity {
         imgComputer.setImageResource(drawables[randomNumber]);
 
         // TODO: compare human number to computer number to determine winner
+        if (humanNumber == randomNumber)
+        {
+            //display tie
+        }
+        else if(humanNumber == 0 && randomNumber == 1)
+        {
+            //Rock vs Paper
+            // Computer is winner
+        }
+        else if (humanNumber == 0 && randomNumber == 2)
+        {
+            //Rock vs Scissors
+            // Human is the winner
+        }
+        else if (humanNumber == 1 && randomNumber == 0)
+        {
+            //Paper vs Rock
+            //Human is the winner
+        }
+        else if(humanNumber ==1 && randomNumber == 2)
+        {
+            //Paper vs Scissors
+            //Computer is winner
+        }
+        else if(humanNumber ==2 && randomNumber == 0)
+        {
+            //Scissors vs Rock
+            //Computer is winner
+        }
+        else if(humanNumber == 2 && randomNumber == 1)
+        {
+            //Scissors vs Paper
+            //Human is the winner
+        }
     }
 }

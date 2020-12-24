@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_activity_margin"
         android:gravity="center"
-        android:text="Winner is: Human"
+        android:text="Winner is: Tie"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
         app:layout_constraintBottom_toBottomOf="@+id/card_human"
         app:layout_constraintEnd_toStartOf="@id/card_computer"
