@@ -1,7 +1,8 @@
-package com.example.rockpaperscissors;
+package com.example.rockpaperscissors.activities;
 
 import android.os.Bundle;
 
+import com.example.rockpaperscissors.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 

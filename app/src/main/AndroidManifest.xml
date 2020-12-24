@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RockPaperScissors">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.RockPaperScissors.NoActionBar">
             <intent-filter>
@@ -19,6 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.rockpaperscissors.activities.Settings"
+            android:label="Settings"></activity>
     </application>
 
 </manifest>
