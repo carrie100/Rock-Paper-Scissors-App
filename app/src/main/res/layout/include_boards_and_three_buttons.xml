@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/content_main">
+
+    <include layout="@layout/main_include_rounds_board" />
+    <include layout="@layout/main_include_game_board" />
+    <include layout="@layout/main_include_three_buttons" />
+
+</merge>

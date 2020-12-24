@@ -1,41 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/game_board"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="300dp"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_margin="@dimen/default_activity_margin"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/rounds_board"
+    app:layout_constraintBottom_toTopOf="@+id/three_buttons"
     tools:showIn="@layout/content_main">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_human"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_activity_margin"
+        app:layout_constraintEnd_toStartOf="@+id/guideLeft"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:weightSum="10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Human Choice" />
-
             <ImageView
                 android:id="@+id/img_human_choice"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="8"
                 android:src="@drawable/rock" />
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:text="Your choice" />
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".33" />
 
     <TextView
         android:id="@+id/tv_board_winner"
@@ -46,33 +60,46 @@
         android:text="Winner is: Tie"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
         app:layout_constraintBottom_toBottomOf="@+id/card_human"
-        app:layout_constraintEnd_toStartOf="@id/card_computer"
-        app:layout_constraintStart_toEndOf="@+id/card_human"
+        app:layout_constraintEnd_toStartOf="@+id/guideRight"
+        app:layout_constraintStart_toEndOf="@+id/guideLeft"
         app:layout_constraintTop_toTopOf="@+id/card_human" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".67" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_computer"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_activity_margin"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideRight"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:weightSum="10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Computer Choice" />
 
             <ImageView
                 android:id="@+id/img_computer_choice"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="8"
                 android:src="@drawable/scissors" />
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:text="Computer's Choice" />
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>

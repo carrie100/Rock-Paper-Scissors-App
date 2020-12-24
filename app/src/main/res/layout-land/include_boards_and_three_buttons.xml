@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/content_main">
+
+    <include
+        android:id="@+id/rounds_board"
+        layout="@layout/main_include_rounds_board"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/default_activity_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideLand"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideLand"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".5" />
+
+    <include
+        android:id="@+id/game_board"
+        layout="@layout/main_include_game_board"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/default_activity_margin"
+        app:layout_constraintBottom_toTopOf="@+id/three_buttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideLand"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
+
+    <include layout="@layout/main_include_three_buttons"
+        style="@style/MaterialCardWithBorder"
+        android:id="@+id/three_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/double_activity_margin"
+        android:alpha=".8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideLand"
+        />
+
+</merge>

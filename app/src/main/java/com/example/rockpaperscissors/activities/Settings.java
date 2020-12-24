@@ -1,7 +1,6 @@
 package com.example.rockpaperscissors.activities;
 
 import android.os.Bundle;
-import android.preference.Preference;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -68,8 +67,6 @@ public class Settings extends AppCompatActivity{
                     });
                 }
             }
-
-
         }
     }
-}
+

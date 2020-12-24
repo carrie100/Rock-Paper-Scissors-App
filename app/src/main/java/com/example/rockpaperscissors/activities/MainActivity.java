@@ -1,11 +1,14 @@
 package com.example.rockpaperscissors.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.rockpaperscissors.R;
+import com.example.rockpaperscissors.lib.Utils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -15,11 +18,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private ImageView imgHuman, imgComputer;
     private View [] imagesRPS;
+    private TextView tvWinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         imagesRPS = new View[]{findViewById(R.id.image_rock),
                 findViewById(R.id.image_paper),
                 findViewById(R.id.image_scissors)};
+        tvWinner = findViewById(R.id.tv_board_winner);
     }
 
 
@@ -65,64 +71,101 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, Settings.class);
+            startActivityForResult(intent, 1);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==1) {
+            Utils.setNightModeOnOffFromPreferenceValue(
+                    getApplicationContext(), getString(R.string.night_mode_key));
+        }
+    }
+
     public void pickRPS(View view) {
-        int[] drawables = {R.drawable.rock, R.drawable.paper, R.drawable.scissors};
-        int randomNumber, humanNumber;
+        int humanNumber = getHumanNumber(view);
+        updateHumanDrawable((ImageButton) view);
 
-        // Human
-        ImageButton currentView = (ImageButton) view;
-        imgHuman.setImageDrawable(currentView.getDrawable());
+        int computerNumber = (int) Math.floor(Math.random() * 3);
+        updateComputerDrawable(computerNumber);
 
+        updateWinnerInfo(view, humanNumber, computerNumber);
+    }
+
+    private int getHumanNumber(View view) {
+        int humanNumber=-1;
         for (int i = 0; i < imagesRPS.length; i++) {
             if (view == imagesRPS[i])
                 humanNumber = i;
         }
+        return humanNumber;
+    }
 
-        // Do computer
-        randomNumber = (int) Math.floor(Math.random() * 3);
-        //Toast.makeText(getApplicationContext(),"Random: " + randomNumber, Toast.LENGTH_SHORT).show();
-        imgComputer.setImageResource(drawables[randomNumber]);
+    private void updateHumanDrawable(ImageButton view) {
+        ImageButton currentView = view;
+        imgHuman.setImageDrawable(currentView.getDrawable());
+    }
 
+    private void updateComputerDrawable(int computerNumber) {
+        int[] drawables = {R.drawable.rock, R.drawable.paper, R.drawable.scissors};
+        imgComputer.setImageResource(drawables[computerNumber]);
+    }
+
+    private void updateWinnerInfo(View view, int humanNumber, int computerNumber) {
         // TODO: compare human number to computer number to determine winner
-        if (humanNumber == randomNumber)
+        String result, computerWins = "Computer won.", humanWins = "You won!";
+        if (humanNumber == computerNumber)
         {
-            //display tie
+            // display tie
+            result = "Tie Game!";
         }
-        else if(humanNumber == 0 && randomNumber == 1)
+        else if(humanNumber == 0 && computerNumber == 1)
         {
-            //Rock vs Paper
+            // Rock vs Paper
             // Computer is winner
+            result = computerWins;
         }
-        else if (humanNumber == 0 && randomNumber == 2)
+        else if (humanNumber == 0 && computerNumber == 2)
         {
-            //Rock vs Scissors
+            // Rock vs Scissors
             // Human is the winner
+            result = humanWins;
         }
-        else if (humanNumber == 1 && randomNumber == 0)
+        else if (humanNumber == 1 && computerNumber == 0)
         {
-            //Paper vs Rock
-            //Human is the winner
+            // Paper vs Rock
+            // Human is the winner
+            result = humanWins;
         }
-        else if(humanNumber ==1 && randomNumber == 2)
+        else if(humanNumber ==1 && computerNumber == 2)
         {
-            //Paper vs Scissors
-            //Computer is winner
+            // Paper vs Scissors
+            // Computer is winner
+            result = computerWins;
         }
-        else if(humanNumber ==2 && randomNumber == 0)
+        else if(humanNumber ==2 && computerNumber == 0)
         {
-            //Scissors vs Rock
-            //Computer is winner
+            // Scissors vs Rock
+            // Computer is winner
+            result = computerWins;
         }
-        else if(humanNumber == 2 && randomNumber == 1)
+        else if(humanNumber == 2 && computerNumber == 1)
         {
-            //Scissors vs Paper
-            //Human is the winner
+            // Scissors vs Paper
+            // Human is the winner
+            result = humanWins;
         }
+        else
+        {
+            result="Unknown";
+        }
+
+        tvWinner.setText(result);
     }
 }

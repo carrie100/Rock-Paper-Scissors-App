@@ -12,4 +12,18 @@
 
     <string name="new_game">New Game</string>
     <string name="rounds">Rounds</string>
+
+    <!-- Preferences -->
+    <string name="display_header">Display</string>
+    <string name="night_mode_key">Night Mode</string>
+    <string name="night_mode_title">Night/Dark Mode</string>
+    <string name="night_mode_off">Never use Night/Dark Mode</string>
+    <string name="night_mode_on">Use Night/Dark Mode (unless disabled in OS Settings)</string>
+
+    <string name="game_header">Game</string>
+    <string name="auto_save_key">Auto-Save</string>
+    <string name="auto_save_title">Auto-Save Game and Statistics</string>
+    <string name="auto_save_off">On exit, the game in progress and statistics *won\'t* be saved</string>
+    <string name="auto_save_on">On exit, the game in progress and statistics *will* be saved</string>
+
 </resources>
