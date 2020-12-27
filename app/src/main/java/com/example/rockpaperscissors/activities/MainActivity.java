@@ -1,12 +1,12 @@
 package com.example.rockpaperscissors.activities;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import com.example.rockpaperscissors.R;
 import com.example.rockpaperscissors.lib.Utils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,8 +23,17 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private ImageView imgHuman, imgComputer;
-    private View [] imagesRPS;
-    private TextView tvWinner;
+    private View[] mRPSImageViews;
+    private TextView tvCurrentRoundWinner;
+    private TextView tvRound1Computer, tvRound1Player, tvRound1Winner;
+    private TextView tvRound2Computer, tvRound2Player, tvRound2Winner;
+    private TextView tvRound3Computer, tvRound3Player, tvRound3Winner;
+
+    private TextView[] tvRoundsComputer, tvRoundsPlayer, tvRoundsWinner;
+
+    private String[] mRPSStrings;
+    private int currentRound;
+    private int[] mRPSImagesIDs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +44,20 @@ public class MainActivity extends AppCompatActivity {
 
         setupFields();
 
+        currentRound = 1;
+        mRPSStrings = new String[]{"Rock", "Paper", "Scissors"};
+
+        setupFAB();
+    }
+
+    private void setupFAB() {
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                // TODO: Fill in Info or About
+                Utils.showInfoDialog(MainActivity.this,
+                        "Info", "Information to show user");
             }
         });
     }
@@ -48,10 +65,28 @@ public class MainActivity extends AppCompatActivity {
     private void setupFields() {
         imgHuman = findViewById(R.id.img_human_choice);
         imgComputer = findViewById(R.id.img_computer_choice);
-        imagesRPS = new View[]{findViewById(R.id.image_rock),
+
+        mRPSImageViews = new View[]{findViewById(R.id.image_rock),
                 findViewById(R.id.image_paper),
                 findViewById(R.id.image_scissors)};
-        tvWinner = findViewById(R.id.tv_board_winner);
+        mRPSImagesIDs = new int[]
+                {R.drawable.rock, R.drawable.paper, R.drawable.scissors};
+
+        tvCurrentRoundWinner = findViewById(R.id.tv_board_winner);
+
+        tvRound1Computer = findViewById(R.id.tv_data_round1_computer);
+        tvRound1Player = findViewById(R.id.tv_data_round1_player);
+        tvRound1Winner = findViewById(R.id.tv_data_winner_round1);
+        tvRound2Computer = findViewById(R.id.tv_data_round2_computer);
+        tvRound2Player = findViewById(R.id.tv_data_round2_player);
+        tvRound2Winner = findViewById(R.id.tv_data_winner_round2);
+        tvRound3Computer = findViewById(R.id.tv_data_round3_computer);
+        tvRound3Player = findViewById(R.id.tv_data_round3_player);
+        tvRound3Winner = findViewById(R.id.tv_data_winner_round3);
+
+        tvRoundsComputer = new TextView[]{tvRound1Computer, tvRound2Computer, tvRound3Computer};
+        tvRoundsPlayer = new TextView[]{tvRound1Player, tvRound2Player, tvRound3Player};
+        tvRoundsWinner = new TextView[]{tvRound1Winner, tvRound2Winner, tvRound3Winner};
     }
 
 
@@ -82,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==1) {
+        if (requestCode == 1) {
             Utils.setNightModeOnOffFromPreferenceValue(
                     getApplicationContext(), getString(R.string.night_mode_key));
         }
@@ -99,9 +134,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int getHumanNumber(View view) {
-        int humanNumber=-1;
-        for (int i = 0; i < imagesRPS.length; i++) {
-            if (view == imagesRPS[i])
+        int humanNumber = -1;
+        for (int i = 0; i < mRPSImageViews.length; i++) {
+            if (view == mRPSImageViews[i])
                 humanNumber = i;
         }
         return humanNumber;
@@ -109,63 +144,76 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateHumanDrawable(ImageButton view) {
         ImageButton currentView = view;
-        imgHuman.setImageDrawable(currentView.getDrawable());
+        Drawable currentDrawable = currentView.getDrawable();
+        imgHuman.setImageDrawable(currentDrawable);
+
+        int index = Integer.parseInt((String) currentView.getTag());
+        String rps = mRPSStrings[index];
+        TextView currentRoundHuman = tvRoundsPlayer[currentRound-1];
+
+        currentRoundHuman.setText(rps);
     }
 
     private void updateComputerDrawable(int computerNumber) {
-        int[] drawables = {R.drawable.rock, R.drawable.paper, R.drawable.scissors};
-        imgComputer.setImageResource(drawables[computerNumber]);
+        imgComputer.setImageResource(mRPSImagesIDs[computerNumber]);
+        String rps = mRPSStrings[computerNumber];
+        TextView currentRoundComputer = tvRoundsComputer[currentRound-1];
+
+        currentRoundComputer.setText(rps);
     }
 
     private void updateWinnerInfo(View view, int humanNumber, int computerNumber) {
-        // TODO: compare human number to computer number to determine winner
-        String result, computerWins = "Computer won.", humanWins = "You won!";
-        if (humanNumber == computerNumber)
-        {
+
+        final String COMPUTER = "Computer", PLAYER = "Player";
+
+        String result, computerWins = "Computer won.", playerWins = "You won!", winner;
+        if (humanNumber == computerNumber) {
             // display tie
             result = "Tie Game!";
-        }
-        else if(humanNumber == 0 && computerNumber == 1)
-        {
+            winner = "Tie";
+        } else if (humanNumber == 0 && computerNumber == 1) {
             // Rock vs Paper
             // Computer is winner
             result = computerWins;
-        }
-        else if (humanNumber == 0 && computerNumber == 2)
-        {
+            winner = COMPUTER;
+        } else if (humanNumber == 0 && computerNumber == 2) {
             // Rock vs Scissors
             // Human is the winner
-            result = humanWins;
-        }
-        else if (humanNumber == 1 && computerNumber == 0)
-        {
+            result = playerWins;
+            winner = PLAYER;
+        } else if (humanNumber == 1 && computerNumber == 0) {
             // Paper vs Rock
             // Human is the winner
-            result = humanWins;
-        }
-        else if(humanNumber ==1 && computerNumber == 2)
-        {
+            result = playerWins;
+            winner = PLAYER;
+        } else if (humanNumber == 1 && computerNumber == 2) {
             // Paper vs Scissors
             // Computer is winner
             result = computerWins;
-        }
-        else if(humanNumber ==2 && computerNumber == 0)
-        {
+            winner = COMPUTER;
+        } else if (humanNumber == 2 && computerNumber == 0) {
             // Scissors vs Rock
             // Computer is winner
             result = computerWins;
-        }
-        else if(humanNumber == 2 && computerNumber == 1)
-        {
+            winner = COMPUTER;
+        } else if (humanNumber == 2 && computerNumber == 1) {
             // Scissors vs Paper
             // Human is the winner
-            result = humanWins;
-        }
-        else
-        {
-            result="Unknown";
+            result = playerWins;
+            winner = PLAYER;
+        } else {
+            result = "Unknown";
+            winner = result;
         }
 
-        tvWinner.setText(result);
+        // set main board text
+        tvCurrentRoundWinner.setText(result);
+
+        // set the winner in the score board
+        TextView currentRoundWinner = tvRoundsWinner[currentRound-1];
+        currentRoundWinner.setText(winner);
+
+        // go to next round
+        currentRound = currentRound == 3 ? 1 : currentRound + 1;
     }
 }

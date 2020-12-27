@@ -2,8 +2,8 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/MaterialCardWithBorder"
     android:id="@+id/three_buttons"
+    style="@style/MaterialCardWithBorder"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/double_activity_margin"
@@ -25,6 +25,7 @@
             android:layout_height="80dp"
             android:contentDescription="@string/Rock"
             android:scaleType="fitXY"
+            android:tag="0"
             android:text="@string/Rock"
             app:srcCompat="@drawable/rock" />
 
@@ -36,6 +37,7 @@
             android:layout_height="80dp"
             android:contentDescription="@string/Paper"
             android:scaleType="fitXY"
+            android:tag="1"
             android:text="@string/Paper"
             app:srcCompat="@drawable/paper" />
 
@@ -46,6 +48,7 @@
             android:layout_height="80dp"
             android:contentDescription="@string/Scissors"
             android:scaleType="fitXY"
+            android:tag="2"
             android:text="@string/Scissors"
             app:srcCompat="@drawable/scissors" />
     </LinearLayout>
