@@ -33,6 +33,7 @@
     </style>
 
     <style name="TextViewStatistics">
+        <item name="android:freezesText">true</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Subtitle1
@@ -48,7 +49,7 @@
     </style>
 
     <style name="TextViewStatistics.SecondaryTextColor">
-        <item name="android:textColor">@color/primaryTextColoredColor</item>
+        <item name="android:textColor">@color/secondaryTextColoredColor</item>
     </style>
 
     <style name="TextViewStatistics.SecondaryTextColor.Bold">
