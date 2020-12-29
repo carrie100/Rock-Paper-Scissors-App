@@ -11,7 +11,7 @@
 
     <!-- For colored text; default is black/dark-gray (Day) or white/light-gray (Night) -->
     <color name="primaryTextColoredColor">@color/primaryDarkColor</color>
-    <color name="secondaryTextColoredColor">@color/primaryColor</color>
+    <color name="secondaryTextColoredColor">@color/secondaryDarkColor</color>
 
     <!-- Matching colored background -->
     <color name="backgroundColoredColor">@color/primaryLightColor</color>

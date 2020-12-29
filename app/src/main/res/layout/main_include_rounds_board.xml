@@ -1,170 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MaterialCardWithBorder"
     android:id="@+id/rounds_board"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="?actionBarSize"
-    app:layout_constraintTop_toBottomOf="@+id/top_bar"
+    android:layout_width="wrap_content"
+    android:layout_height="0dp"
+    android:layout_margin="@dimen/default_activity_margin"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/top_bar"
     tools:showIn="@layout/content_main">
 
-    <TextView
-        android:id="@+id/tv_label_games_played"
-        style="@style/TextViewStatistics.PrimaryTextColor.Bold"
-        android:layout_marginTop="@dimen/default_activity_margin"
-        android:text="@string/rounds"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/default_activity_margin">
 
-    <!--<TextView
-        android:id="@+id/tv_data_games_played"
-        style="@style/TextViewStatistics.PrimaryTextColor"
-        android:layout_marginStart="@dimen/default_activity_margin"
-        android:layout_marginLeft="@dimen/default_activity_margin"
-        android:layout_marginTop="@dimen/default_activity_margin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_label_games_played"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="18" />-->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
+        <TextView
+            android:id="@+id/tv_label_scoreboard"
+            style="@style/TextViewStatistics.PrimaryTextColor.Bold"
+            android:layout_marginTop="@dimen/default_activity_margin"
+            android:text="@string/score_board"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_label_header_round"
-        style="@style/TextViewStatistics.SecondaryTextColor.Bold"
-        android:layout_marginEnd="@dimen/default_activity_margin"
-        android:layout_marginRight="@dimen/default_activity_margin"
-        android:text="Rounds"
-        app:layout_constraintEnd_toStartOf="@+id/tv_label_header_round1"
-        app:layout_constraintTop_toTopOf="@+id/tv_label_header_round1" />
+        <TextView
+            android:id="@+id/tv_label_header_round"
+            style="@style/TextViewStatistics.SecondaryTextColor.Bold"
+            android:layout_marginEnd="@dimen/default_activity_margin"
+            android:layout_marginRight="@dimen/default_activity_margin"
+            android:text=""
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toStartOf="@+id/tv_label_header_round1"
+            app:layout_constraintTop_toTopOf="@+id/tv_label_header_round1" />
 
-    <TextView
-        android:id="@+id/tv_label_header_round1"
-        style="@style/TextViewStatistics.SecondaryTextColor.Bold"
-        android:layout_marginTop="@dimen/double_activity_margin"
-        android:text="Round 1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_label_games_played" />
+        <TextView
+            android:id="@+id/tv_label_header_round1"
+            style="@style/TextViewStatistics.SecondaryTextColor.Bold"
+            android:layout_marginTop="@dimen/double_activity_margin"
+            android:layout_marginEnd="@dimen/default_activity_margin"
+            android:layout_marginRight="@dimen/default_activity_margin"
+            android:text="@string/round_1"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:layout_constraintEnd_toStartOf="@+id/guide"
+            app:layout_constraintTop_toBottomOf="@+id/tv_label_scoreboard" />
 
-    <TextView
-        android:id="@+id/tv_label_header_round2"
-        style="@style/TextViewStatistics.SecondaryTextColor.Bold"
-        android:layout_marginStart="@dimen/default_activity_margin"
-        android:layout_marginLeft="@dimen/default_activity_margin"
-        android:text="Round 2"
-        app:layout_constraintStart_toEndOf="@+id/tv_label_header_round1"
-        app:layout_constraintTop_toTopOf="@+id/tv_label_header_round1" />
+        <TextView
+            android:id="@+id/tv_label_header_round2"
+            style="@style/TextViewStatistics.SecondaryTextColor.Bold"
+            android:layout_marginStart="@dimen/default_activity_margin"
+            android:layout_marginLeft="@dimen/default_activity_margin"
+            android:text="@string/round_2"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:layout_constraintStart_toStartOf="@+id/guide"
+            app:layout_constraintTop_toTopOf="@+id/tv_label_header_round1" />
 
-    <TextView
-        android:id="@+id/tv_label_header_round3"
-        style="@style/TextViewStatistics.SecondaryTextColor.Bold"
-        android:layout_marginStart="@dimen/default_activity_margin"
-        android:layout_marginLeft="@dimen/default_activity_margin"
-        android:text="Round 3"
-        app:layout_constraintStart_toEndOf="@+id/tv_label_header_round2"
-        app:layout_constraintTop_toTopOf="@+id/tv_label_header_round2" />
+        <TextView
+            android:id="@+id/tv_label_header_round3"
+            style="@style/TextViewStatistics.SecondaryTextColor.Bold"
+            android:layout_marginStart="@dimen/default_activity_margin"
+            android:layout_marginLeft="@dimen/default_activity_margin"
+            android:layout_marginEnd="@dimen/default_activity_margin"
+            android:layout_marginRight="@dimen/default_activity_margin"
+            android:text="@string/round_3"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_label_header_round2"
+            app:layout_constraintTop_toTopOf="@+id/tv_label_header_round2" />
 
-    <TextView
-        android:id="@+id/tv_label_player_computer"
-        style="@style/TextViewStatistics.SecondaryTextColor"
-        android:text="Computer"
-        app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round"
-        app:layout_constraintStart_toStartOf="@+id/tv_label_header_round"
-        app:layout_constraintTop_toTopOf="@+id/tv_data_round1_computer" />
+        <TextView
+            android:id="@+id/tv_label_player_computer"
+            style="@style/TextViewStatistics.SecondaryTextColor.Bold"
+            android:layout_marginStart="@dimen/default_activity_margin"
+            android:layout_marginLeft="@dimen/default_activity_margin"
+            android:text="@string/computer"
+            app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_data_round1_computer" />
 
-    <TextView
-        android:id="@+id/tv_data_round1_computer"
-        style="@style/TextViewStatistics.SecondaryTextColor"
-        android:layout_marginTop="@dimen/default_activity_margin"
-        app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round1"
-        app:layout_constraintStart_toStartOf="@+id/tv_label_header_round1"
-        app:layout_constraintTop_toBottomOf="@+id/tv_label_header_round1"
-        tools:text="6" />
+        <TextView
+            android:id="@+id/tv_data_round1_computer"
+            style="@style/TextViewStatistics.SecondaryTextColor"
+            android:layout_marginTop="@dimen/default_activity_margin"
+            app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round1"
+            app:layout_constraintStart_toStartOf="@+id/tv_label_header_round1"
+            app:layout_constraintTop_toBottomOf="@+id/tv_label_header_round1"
+            tools:text="6" />
 
-    <TextView
-        android:id="@+id/tv_data_round2_computer"
-        style="@style/TextViewStatistics.SecondaryTextColor"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round2"
-        app:layout_constraintStart_toStartOf="@+id/tv_label_header_round2"
-        app:layout_constraintTop_toTopOf="@+id/tv_data_round1_computer"
-        tools:text="33%" />
+        <TextView
+            android:id="@+id/tv_data_round2_computer"
+            style="@style/TextViewStatistics.SecondaryTextColor"
+            app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round2"
+            app:layout_constraintStart_toStartOf="@+id/tv_label_header_round2"
+            app:layout_constraintTop_toTopOf="@+id/tv_data_round1_computer"
+            tools:text="33%" />
 
-    <TextView
-        android:id="@+id/tv_data_round3_computer"
-        style="@style/TextViewStatistics.SecondaryTextColor"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round3"
-        app:layout_constraintStart_toStartOf="@+id/tv_label_header_round3"
-        app:layout_constraintTop_toTopOf="@+id/tv_data_round1_computer"
-        tools:text="33%" />
+        <TextView
+            android:id="@+id/tv_data_round3_computer"
+            style="@style/TextViewStatistics.SecondaryTextColor"
+            app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round3"
+            app:layout_constraintStart_toStartOf="@+id/tv_label_header_round3"
+            app:layout_constraintTop_toTopOf="@+id/tv_data_round1_computer"
+            tools:text="33%" />
 
-    <TextView
-        android:id="@+id/tv_label_player2_player"
-        style="@style/TextViewStatistics.SecondaryTextColor"
-        android:text="Player"
-        app:layout_constraintEnd_toEndOf="@+id/tv_label_player_computer"
-        app:layout_constraintTop_toTopOf="@+id/tv_data_round1_player" />
+        <TextView
+            android:id="@+id/tv_label_player2_player"
+            style="@style/TextViewStatistics.SecondaryTextColor.Bold"
+            android:text="@string/player"
+            app:layout_constraintEnd_toEndOf="@+id/tv_label_player_computer"
+            app:layout_constraintTop_toTopOf="@+id/tv_data_round1_player" />
 
-    <TextView
-        android:id="@+id/tv_data_round1_player"
-        style="@style/TextViewStatistics.SecondaryTextColor"
-        android:layout_marginTop="@dimen/default_activity_margin"
-        app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round1"
-        app:layout_constraintStart_toStartOf="@+id/tv_label_header_round1"
-        app:layout_constraintTop_toBottomOf="@+id/tv_data_round1_computer"
-        tools:text="9" />
+        <TextView
+            android:id="@+id/tv_data_round1_player"
+            style="@style/TextViewStatistics.SecondaryTextColor"
+            android:layout_marginTop="@dimen/default_activity_margin"
+            app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round1"
+            app:layout_constraintStart_toStartOf="@+id/tv_label_header_round1"
+            app:layout_constraintTop_toBottomOf="@+id/tv_data_round1_computer"
+            tools:text="9" />
 
-    <TextView
-        android:id="@+id/tv_data_round2_player"
-        style="@style/TextViewStatistics.SecondaryTextColor"
-        app:layout_constraintStart_toStartOf="@+id/tv_data_round2_computer"
-        app:layout_constraintTop_toTopOf="@+id/tv_data_round1_player"
-        tools:text="50%" />
+        <TextView
+            android:id="@+id/tv_data_round2_player"
+            style="@style/TextViewStatistics.SecondaryTextColor"
+            app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round2"
+            app:layout_constraintStart_toStartOf="@+id/tv_label_header_round2"
+            app:layout_constraintTop_toTopOf="@+id/tv_data_round1_player"
+            tools:text="50%" />
 
-    <TextView
-        android:id="@+id/tv_data_round3_player"
-        style="@style/TextViewStatistics.SecondaryTextColor"
-        app:layout_constraintStart_toStartOf="@+id/tv_data_round3_computer"
-        app:layout_constraintTop_toTopOf="@+id/tv_data_round1_player"
-        tools:text="50%" />
+        <TextView
+            android:id="@+id/tv_data_round3_player"
+            style="@style/TextViewStatistics.SecondaryTextColor"
+            app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round3"
+            app:layout_constraintStart_toStartOf="@+id/tv_label_header_round3"
+            app:layout_constraintTop_toTopOf="@+id/tv_data_round1_player"
+            tools:text="50%" />
 
-    <TextView
-        android:id="@+id/tv_label_winner"
-        style="@style/TextViewStatistics.SecondaryTextColor"
-        android:text="Winner"
-        app:layout_constraintEnd_toEndOf="@+id/tv_label_player2_player"
-        app:layout_constraintTop_toTopOf="@+id/tv_data_winner_round1" />
+        <TextView
+            android:id="@+id/tv_label_winner"
+            style="@style/TextViewStatistics.PrimaryTextColor.Bold"
+            android:text="@string/winner"
+            app:layout_constraintEnd_toEndOf="@+id/tv_label_player2_player"
+            app:layout_constraintTop_toTopOf="@+id/tv_data_winner_round1" />
 
-    <TextView
-        android:id="@+id/tv_data_winner_round1"
-        style="@style/TextViewStatistics.SecondaryTextColor"
-        android:layout_marginTop="@dimen/default_activity_margin"
-        app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round1"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="@+id/tv_label_header_round1"
-        app:layout_constraintTop_toBottomOf="@+id/tv_data_round1_player"
-        tools:text="9" />
+        <TextView
+            android:id="@+id/tv_data_winner_round1"
+            style="@style/TextViewStatistics.PrimaryTextColor"
+            android:layout_marginTop="@dimen/default_activity_margin"
+            app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round1"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="@+id/tv_label_header_round1"
+            app:layout_constraintTop_toBottomOf="@+id/tv_data_round1_player"
+            tools:text="Player" />
 
-    <TextView
-        android:id="@+id/tv_data_winner_round2"
-        style="@style/TextViewStatistics.SecondaryTextColor"
-        app:layout_constraintStart_toStartOf="@+id/tv_data_round2_computer"
-        app:layout_constraintTop_toTopOf="@+id/tv_data_winner_round1"
-        tools:text="50%" />
+        <TextView
+            android:id="@+id/tv_data_winner_round2"
+            style="@style/TextViewStatistics.PrimaryTextColor"
+            app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round2"
+            app:layout_constraintStart_toStartOf="@+id/tv_label_header_round2"
+            app:layout_constraintTop_toTopOf="@+id/tv_data_winner_round1"
+            tools:text="Computer" />
 
-    <TextView
-        android:id="@+id/tv_data_winner_round3"
-        style="@style/TextViewStatistics.SecondaryTextColor"
-        app:layout_constraintStart_toStartOf="@+id/tv_data_round3_computer"
-        app:layout_constraintTop_toTopOf="@+id/tv_data_winner_round1"
-        tools:text="50%" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_data_winner_round3"
+            style="@style/TextViewStatistics.PrimaryTextColor"
+            app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round3"
+            app:layout_constraintStart_toStartOf="@+id/tv_label_header_round3"
+            app:layout_constraintTop_toTopOf="@+id/tv_data_winner_round1"
+            tools:text="Player" />
+
+        <TextView
+            android:id="@+id/tv_board_winner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/double_activity_margin"
+            android:freezesText="true"
+            android:gravity="center"
+            android:text="@string/welcome_to_a_new_game"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_label_winner" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
