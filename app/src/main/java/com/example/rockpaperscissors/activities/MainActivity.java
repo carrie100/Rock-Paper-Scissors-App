@@ -81,7 +81,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // TODO: Fill in Info or About
                 Utils.showInfoDialog(MainActivity.this,
-                        "Info", "Information to show user");
+                        "Info", "Rock Paper Scissors Game\n" +
+                                "The goal of the game is to beat the computer. " +
+                                "Rock beats Scissors. Scissors beats Paper. Paper beats Rock");
             }
         });
     }
