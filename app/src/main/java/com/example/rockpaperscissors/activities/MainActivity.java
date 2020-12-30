@@ -1,6 +1,7 @@
 package com.example.rockpaperscissors.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -8,6 +9,7 @@ import com.example.rockpaperscissors.R;
 import com.example.rockpaperscissors.lib.Utils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,9 +24,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
+import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
+
 public class MainActivity extends AppCompatActivity {
 
-    private final String mCOMPUTER = "Computer", mPLAYER = "Player", mTIE = "Tie";
+    private final String mCOMPUTER = "Computer", mPLAYER = "Player", mTIE = "Tie", mKEY_ROUNDS_ARRAY = "Rounds Array";
 
     private ImageView mImageViewPlayer, mImageViewComputer;
     private View[] mRPSImageViews;
@@ -35,7 +41,11 @@ public class MainActivity extends AppCompatActivity {
     private String[] mRPSStrings;
     private int mCurrentRound;
     private int[] mRPSImagesIDs;
-    private int mCurrentRoundComputerPick, mCurrentRoundPlayerPick;
+    private int mCurrentRoundComputerPick, mCurrentRoundPlayerPick, mCurrentRoundWinner;
+
+    private int [][] mRoundsArray;
+
+    private boolean mUseAutoSave;
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -60,6 +70,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        if (mUseAutoSave)
+        {
+            SharedPreferences defaultSP = getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = defaultSP.edit();
+
+            Gson gson = new Gson();
+            editor.putString(mKEY_ROUNDS_ARRAY, gson.toJson(mRoundsArray));
+            editor.putInt("CURRENT_PLAYER_PICK", mCurrentRoundPlayerPick);
+            editor.putInt("CURRENT_COMPUTER_PICK", mCurrentRoundComputerPick);
+            editor.putInt("CURRENT_ROUND",mCurrentRound);
+
+            editor.apply();
+        }
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -67,11 +96,66 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         setupFields();
+        SharedPreferences defaultSP = getDefaultSharedPreferences(this);
 
         mRPSStrings = new String[]{"Rock", "Paper", "Scissors"};
-        startNewGame();
+        mRoundsArray = new int[3][3];
 
+        startNewGame();
         setupFAB();
+
+        mUseAutoSave = defaultSP.getBoolean(getString(R.string.auto_save_key), true);
+
+        restoreFromPrefsOnNewRun(savedInstanceState, defaultSP);
+
+    }
+
+    private void restoreFromPrefsOnNewRun(Bundle savedInstanceState, SharedPreferences defaultSP) {
+        // if we're starting a new run (not on rotation) and auto save is on then restore from prefs
+        if (savedInstanceState==null && mUseAutoSave)
+        {
+            // restore the rounds array from prefs
+            Gson gson = new Gson();
+            String JSON = defaultSP.getString(mKEY_ROUNDS_ARRAY,"");
+            if (!JSON.equals(""))
+                mRoundsArray = gson.fromJson(JSON,int[][].class);
+
+            String winner;
+            for (int i = 0; i < mRoundsArray.length; i++) {
+                if (mRoundsArray[i][0] != -1) {
+                    tvRoundsComputer[i].setText(mRPSStrings[mRoundsArray[i][0]]);
+                    tvRoundsPlayer[i].setText(mRPSStrings[mRoundsArray[i][1]]);
+
+                    switch (mRoundsArray[i][2])
+                    {
+                        case 0:
+                           winner = mCOMPUTER;
+                           break;
+                        case 1:
+                            winner = mPLAYER;
+                            break;
+                        case 2:
+                            winner = mTIE;
+                            break;
+                        default:
+                            winner="";
+                    }
+
+                    //tvRoundsWinner[i].setText(winner);
+                }
+            }
+
+            // restore the prior round images, if any
+            mCurrentRound = defaultSP.getInt("CURRENT_ROUND", 1);
+            mCurrentRoundPlayerPick = defaultSP.getInt("CURRENT_PLAYER_PICK",-1);
+            mCurrentRoundComputerPick = defaultSP.getInt("CURRENT_COMPUTER_PICK",-1);
+
+            if (mCurrentRoundPlayerPick !=-1)
+                mImageViewPlayer.setImageResource(mRPSImagesIDs[mCurrentRoundPlayerPick]);
+
+            if (mCurrentRoundComputerPick !=-1)
+                mImageViewComputer.setImageResource(mRPSImagesIDs[mCurrentRoundComputerPick]);
+        }
     }
 
     private void setupFAB() {
@@ -160,6 +244,11 @@ public class MainActivity extends AppCompatActivity {
 
         mCurrentRoundComputerPick = -1;
         mCurrentRoundPlayerPick = -1;
+
+        // set all elements to -1
+        for (int[] round : mRoundsArray) {
+            Arrays.fill(round, -1);
+        }
     }
 
     @Override
@@ -179,10 +268,24 @@ public class MainActivity extends AppCompatActivity {
             mCurrentRoundComputerPick = (int) Math.floor(Math.random() * 3);
             updateComputerDrawable();
 
+            updateRoundsArray();
+
+            // update winner info and increment round if not a tie
             updateWinnerInfo(view);
+
         } else {
             Snackbar.make(view, getString(R.string.game_already_over), Snackbar.LENGTH_SHORT).show();
         }
+    }
+
+    private void updateRoundsArray() {
+        // rounds start at 1; we need 0-based
+        int currentRound = mCurrentRound-1;
+
+        // computer then player
+        mRoundsArray[currentRound][0] = mCurrentRoundComputerPick;
+        mRoundsArray[currentRound][1] = mCurrentRoundPlayerPick;
+        mRoundsArray[currentRound][2] = mCurrentRoundWinner;
     }
 
     private int getHumanNumber(View view) {
@@ -219,26 +322,31 @@ public class MainActivity extends AppCompatActivity {
             // display tie
             result = "Tie Game! Repeat this round";
             winner = "Tie";
+            mCurrentRoundWinner = 2;
         } else if (mCurrentRoundPlayerPick == 0 && mCurrentRoundComputerPick == 1) {
             // Rock vs Paper
             // Computer is winner
             result = computerWins;
             winner = mCOMPUTER;
+            mCurrentRoundWinner = 0;
         } else if (mCurrentRoundPlayerPick == 0 && mCurrentRoundComputerPick == 2) {
             // Rock vs Scissors
             // Human is the winner
             result = playerWins;
             winner = mPLAYER;
+            mCurrentRoundWinner = 1;
         } else if (mCurrentRoundPlayerPick == 1 && mCurrentRoundComputerPick == 0) {
             // Paper vs Rock
             // Human is the winner
             result = playerWins;
             winner = mPLAYER;
+            mCurrentRoundWinner = 1;
         } else if (mCurrentRoundPlayerPick == 1 && mCurrentRoundComputerPick == 2) {
             // Paper vs Scissors
             // Computer is winner
             result = computerWins;
             winner = mCOMPUTER;
+            mCurrentRoundWinner = 0;
         } else if (mCurrentRoundPlayerPick == 2 && mCurrentRoundComputerPick == 0) {
             // Scissors vs Rock
             // Computer is winner
@@ -249,9 +357,11 @@ public class MainActivity extends AppCompatActivity {
             // Human is the winner
             result = playerWins;
             winner = mPLAYER;
+            mCurrentRoundWinner = 1;
         } else {
             result = "Unknown";
             winner = result;
+            mCurrentRoundWinner = -1;
         }
 
         // set the round winner in the score board

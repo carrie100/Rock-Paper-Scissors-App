@@ -9,8 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.rockpaperscissors.R;
 import com.example.rockpaperscissors.lib.Utils;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.*;
 
 public class Settings extends AppCompatActivity{
 
