@@ -28,6 +28,7 @@
     <string name="welcome_to_a_new_game">Welcome!</string>
     <string name="game_already_over">Game has already ended. Please start a new game</string>
     <string name="game_winner_colon">"Game Winner: "</string>
+    <string name="game_winner_no_winner">Tie Game</string>
     <string name="computer_choice">Computer\'s Choice</string>
     <string name="your_choice">Your choice</string>
     <string name="winner">Winner</string>
@@ -36,5 +37,8 @@
     <string name="round_3">Round 3</string>
     <string name="computer">Computer</string>
     <string name="player">Player</string>
+    <string name="win_computer">Computer won.</string>
+    <string name="win_player">You won!</string>
+    <string name="win_tie">Tie game.</string>
 
 </resources>

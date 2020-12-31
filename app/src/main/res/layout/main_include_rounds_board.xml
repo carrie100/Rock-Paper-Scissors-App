@@ -150,10 +150,10 @@
             style="@style/TextViewStatistics.PrimaryTextColor.Bold"
             android:text="@string/winner"
             app:layout_constraintEnd_toEndOf="@+id/tv_label_player2_player"
-            app:layout_constraintTop_toTopOf="@+id/tv_data_winner_round1" />
+            app:layout_constraintTop_toTopOf="@+id/tv_data_round1_winner" />
 
         <TextView
-            android:id="@+id/tv_data_winner_round1"
+            android:id="@+id/tv_data_round1_winner"
             style="@style/TextViewStatistics.PrimaryTextColor"
             android:layout_marginTop="@dimen/default_activity_margin"
             app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round1"
@@ -163,19 +163,19 @@
             tools:text="Player" />
 
         <TextView
-            android:id="@+id/tv_data_winner_round2"
+            android:id="@+id/tv_data_round2_winner"
             style="@style/TextViewStatistics.PrimaryTextColor"
             app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round2"
             app:layout_constraintStart_toStartOf="@+id/tv_label_header_round2"
-            app:layout_constraintTop_toTopOf="@+id/tv_data_winner_round1"
+            app:layout_constraintTop_toTopOf="@+id/tv_data_round1_winner"
             tools:text="Computer" />
 
         <TextView
-            android:id="@+id/tv_data_winner_round3"
+            android:id="@+id/tv_data_round3_winner"
             style="@style/TextViewStatistics.PrimaryTextColor"
             app:layout_constraintEnd_toEndOf="@+id/tv_label_header_round3"
             app:layout_constraintStart_toStartOf="@+id/tv_label_header_round3"
-            app:layout_constraintTop_toTopOf="@+id/tv_data_winner_round1"
+            app:layout_constraintTop_toTopOf="@+id/tv_data_round1_winner"
             tools:text="Player" />
 
         <TextView

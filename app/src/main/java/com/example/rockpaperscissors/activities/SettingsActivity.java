@@ -11,7 +11,7 @@ import com.example.rockpaperscissors.R;
 import com.example.rockpaperscissors.lib.Utils;
 import androidx.preference.*;
 
-public class Settings extends AppCompatActivity{
+public class SettingsActivity extends AppCompatActivity{
 
 
         @Override
